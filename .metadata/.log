@@ -786,3 +786,6 @@ Please check for update: Help > Check for Updates
 
 !ENTRY com.st.stm32cube.ide.mcu.debug.launch 2 0 2022-12-13 20:10:06.272
 !MESSAGE Won't launch debug session since we failed to locate the binary.
+
+!ENTRY org.eclipse.cdt.core 1 0 2022-12-13 20:36:29.613
+!MESSAGE Indexed 'ASM' (21 sources, 111 headers) in 1.36 sec: 9,407 declarations; 49,211 references; 2 unresolved inclusions; 36 syntax errors; 188 unresolved names (0.32%)
