@@ -18,12 +18,15 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "global.h"
+#include "traffic_light_processing.h"
+#include "sched.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,10 +57,19 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void test_IO() {
-	HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, GPIO_PIN_SET);
-	HAL_GPIO_TogglePin(D12_GPIO_Port, D12_Pin);
+void task1(void) {
+	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ON);
+	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, OFF);
+}
+
+void task2(void) {
+	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, OFF);
+	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ON);
+}
+
+void task3(void) {
+	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ON);
+	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ON);
 }
 /* USER CODE END 0 */
 
@@ -90,16 +102,20 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim3);
 
+  SCH_Add_Task(&task1, 0, 5000);
+  SCH_Add_Task(&task2, 5000, 5000);
+  SCH_Add_Task(&task3, 10000, 2000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  test_IO();
-	  HAL_Delay(1000);
+	SCH_Dispatch_Tasks();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -146,7 +162,11 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+int count = 100;
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+	SCH_Update();
+}
 /* USER CODE END 4 */
 
 /**
