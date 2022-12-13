@@ -1,7 +1,7 @@
-../Core/Src/traffic_light_processing.c:21:6:blinkGrnLight	16	static
-../Core/Src/traffic_light_processing.c:26:6:blinkYelLight	16	static
-../Core/Src/traffic_light_processing.c:31:6:blinkRedLight	16	static
-../Core/Src/traffic_light_processing.c:36:6:grnLight	16	static
-../Core/Src/traffic_light_processing.c:41:6:yelLight	16	static
-../Core/Src/traffic_light_processing.c:46:6:redLight	16	static
-../Core/Src/traffic_light_processing.c:51:6:allOff	16	static
+../Core/Src/traffic_light_processing.c:21:6:trafficLightBlinkGrn	16	static
+../Core/Src/traffic_light_processing.c:26:6:trafficLightBlinkYel	16	static
+../Core/Src/traffic_light_processing.c:31:6:trafficLightBlinkRed	16	static
+../Core/Src/traffic_light_processing.c:36:6:trafficLightGrn	16	static
+../Core/Src/traffic_light_processing.c:41:6:trafficLightYel	16	static
+../Core/Src/traffic_light_processing.c:46:6:trafficLightRed	16	static
+../Core/Src/traffic_light_processing.c:51:6:trafficLighOff	16	static

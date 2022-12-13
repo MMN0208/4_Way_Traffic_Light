@@ -18,37 +18,37 @@ uint16_t trafficLightPin[NUM_OF_TRAFFIC_LIGHTS][NUM_OF_PORTS] = {
 		{D4_Pin, D5_Pin}
 };
 
-void blinkGrnLight(int index) {
+void trafficLightBlinkGrn(int index) {
 	HAL_GPIO_TogglePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT]);
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], OFF);
 }
 
-void blinkYelLight(int index) {
+void trafficLightBlinkYel(int index) {
 	HAL_GPIO_TogglePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT]);
 	HAL_GPIO_TogglePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT]);
 }
 
-void blinkRedLight(int index) {
+void trafficLightBlinkRed(int index) {
 	HAL_GPIO_TogglePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT]);
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], OFF);
 }
 
-void grnLight(int index) {
+void trafficLightGrn(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], ON);
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], OFF);
 }
 
-void yelLight(int index) {
+void trafficLightYel(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], ON);
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], ON);
 }
 
-void redLight(int index) {
+void trafficLightRed(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], ON);
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], OFF);
 }
 
-void allOff(int index) {
+void trafficLighOff(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], OFF);
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], OFF);
 }

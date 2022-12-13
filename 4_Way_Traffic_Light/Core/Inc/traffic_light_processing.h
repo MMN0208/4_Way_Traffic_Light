@@ -23,14 +23,14 @@
 #define TRAFFIC_LIGHT_1 	0
 #define TRAFFIC_LIGHT_2		1
 
-void blinkGrnLight(int index);
-void blinkYelLight(int index);
-void blinkRedLight(int index);
+void trafficLightBlinkGrn(int index);
+void trafficLightBlinkYel(int index);
+void trafficLightBlinkRed(int index);
 
-void grnLight(int index);
-void yelLight(int index);
-void redLight(int index);
+void trafficLightGrn(int index);
+void trafficLightYel(int index);
+void trafficLightRed(int index);
 
-void allOff(int index);
+void trafficLightOff(int index);
 
 #endif /* INC_TRAFFIC_LIGHT_PROCESSING_H_ */
