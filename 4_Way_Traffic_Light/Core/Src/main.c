@@ -48,7 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t value = 90;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -74,6 +74,17 @@ void task2(void) {
 void task3(void) {
 	if(isButtonPressed(BUTTON_2)) {
 		trafficLightBlinkRed(TRAFFIC_LIGHT_2);
+	}
+}
+
+void task4(void) {
+	HAL_GPIO_WritePin(D12_GPIO_Port, D12_Pin, GPIO_PIN_RESET);
+	if(value > 0) {
+		htim3.Instance->CCR1 = value;
+		value -= 10;
+	}
+	else {
+		value = 90;
 	}
 }
 /* USER CODE END 0 */
@@ -110,11 +121,13 @@ int main(void)
   MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
   SCH_Add_Task(&buttonRead, 0, 10);
   SCH_Add_Task(&task1, 0, 10);
   SCH_Add_Task(&task2, 0, 10);
   SCH_Add_Task(&task3, 0, 10);
+  SCH_Add_Task(&task4, 0, 500);
   /* USER CODE END 2 */
 
   /* Infinite loop */

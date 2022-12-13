@@ -1,4 +1,4 @@
-19:44:42 **** Incremental Build of configuration Debug for project 4_Way_Traffic_Light ****
+20:03:04 **** Incremental Build of configuration Debug for project 4_Way_Traffic_Light ****
 make -j12 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "4_Way_Traffic_Light.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\ADMIN\Documents\MCU\4_Way_Traffic_Light\4_Way_Traffic_Light\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="4_Way_Traffic_Light.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -7,11 +7,11 @@ Finished building target: 4_Way_Traffic_Light.elf
 arm-none-eabi-size   4_Way_Traffic_Light.elf 
 arm-none-eabi-objdump -h -S  4_Way_Traffic_Light.elf  > "4_Way_Traffic_Light.list"
    text	   data	    bss	    dec	    hex	filename
-   9748	     96	   2536	  12380	   305c	4_Way_Traffic_Light.elf
+  11796	    100	   2532	  14428	   385c	4_Way_Traffic_Light.elf
 Finished building: default.size.stdout
  
 Finished building: 4_Way_Traffic_Light.list
  
 
-19:44:43 Build Finished. 0 errors, 0 warnings. (took 466ms)
+20:03:05 Build Finished. 0 errors, 0 warnings. (took 465ms)
 
