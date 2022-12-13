@@ -19,10 +19,7 @@
 #define BUTTON_IS_PRESSED                  GPIO_PIN_RESET
 #define BUTTON_IS_RELEASED                 GPIO_PIN_SET
 
-#define PEDESTRIAN_BUTTON		0
-#define BUTTON_1 				1
-#define BUTTON_2				2
-#define BUTTON_3				3
+
 
 void buttonRead(void);
 int isButtonPressed(int index);

@@ -111,10 +111,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
 
-  SCH_Add_Task(&buttonRead, 0, 10);
-  SCH_Add_Task(&task1, 0, 10);
-  SCH_Add_Task(&task2, 0, 10);
-  SCH_Add_Task(&task3, 0, 10);
+  SCH_Add_Task(&buttonRead, 0, 1);
+  SCH_Add_Task(&task1, 0, 500);
+  SCH_Add_Task(&task2, 0, 1500);
+  SCH_Add_Task(&task3, 0, 2000);
   /* USER CODE END 2 */
 
   /* Infinite loop */

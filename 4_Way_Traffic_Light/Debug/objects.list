@@ -1,5 +1,6 @@
 "./Core/Src/fsm_for_multi_mode.o"
 "./Core/Src/gpio.o"
+"./Core/Src/input_reading.o"
 "./Core/Src/main.o"
 "./Core/Src/pedestrian_light_processing.o"
 "./Core/Src/sched.o"

@@ -27,7 +27,6 @@
 #include "global.h"
 #include "traffic_light_processing.h"
 #include "pedestrian_light_processing.h"
-#include "input_reading.h"
 #include "sched.h"
 /* USER CODE END Includes */
 
@@ -60,21 +59,15 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void task1(void) {
-	if(isButtonPressed(PEDESTRIAN_BUTTON)) {
-		pedestrianLightBlinkGrn();
-	}
+	pedestrianLightBlinkGrn();
 }
 
 void task2(void) {
-	if(isButtonPressed(BUTTON_1)) {
-		trafficLightBlinkYel(TRAFFIC_LIGHT_1);
-	}
+	trafficLightBlinkYel(TRAFFIC_LIGHT_1);
 }
 
 void task3(void) {
-	if(isButtonPressed(BUTTON_2)) {
-		trafficLightBlinkRed(TRAFFIC_LIGHT_2);
-	}
+	trafficLightBlinkRed(TRAFFIC_LIGHT_2);
 }
 /* USER CODE END 0 */
 
@@ -111,10 +104,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
 
-  SCH_Add_Task(&buttonRead, 0, 10);
-  SCH_Add_Task(&task1, 0, 10);
-  SCH_Add_Task(&task2, 0, 10);
-  SCH_Add_Task(&task3, 0, 10);
+  SCH_Add_Task(&task1, 0, 500);
+  SCH_Add_Task(&task2, 0, 1500);
+  SCH_Add_Task(&task3, 0, 2000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
