@@ -1,0 +1,42 @@
+/*
+ * pedestrian_light_processing.c
+ *
+ *  Created on: Dec 13, 2022
+ *      Author: ADMIN
+ */
+
+
+#include "pedestrian_light_processing.h"
+
+GPIO_TypeDef * pedestrianLightPort[NUM_OF_PORTS] = {
+		D6_GPIO_Port,
+		D7_GPIO_Port
+};
+
+uint16_t pedestrianLightPin[NUM_OF_PORTS] = {
+		D6_Pin,
+		D7_Pin
+};
+
+void pedestrianLightBlinkGrn(void) {
+	HAL_GPIO_TogglePin(pedestrianLightPort[GRN_LIGHT], pedestrianLightPin[GRN_LIGHT]);
+	HAL_GPIO_WritePin(pedestrianLightPort[RED_LIGHT], pedestrianLightPin[RED_LIGHT], OFF);
+}
+
+void pedestrianLightBlinkRed(void) {
+	HAL_GPIO_TogglePin(pedestrianLightPort[RED_LIGHT], pedestrianLightPin[RED_LIGHT]);
+	HAL_GPIO_WritePin(pedestrianLightPort[GRN_LIGHT], pedestrianLightPin[GRN_LIGHT], OFF);
+}
+
+void pedestrianLightGrn(void) {
+	HAL_GPIO_WritePin(pedestrianLightPort[GRN_LIGHT], pedestrianLightPin[GRN_LIGHT], ON);
+	HAL_GPIO_WritePin(pedestrianLightPort[RED_LIGHT], pedestrianLightPin[RED_LIGHT], OFF);
+}
+
+void pedestrianLightRed(void) {
+
+}
+
+void pedestrianLightOff(void) {
+
+}

@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "global.h"
 #include "traffic_light_processing.h"
+#include "pedestrian_light_processing.h"
 #include "sched.h"
 /* USER CODE END Includes */
 
@@ -58,18 +59,15 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void task1(void) {
-	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ON);
-	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, OFF);
+	pedestrianLightBlinkGrn();
 }
 
 void task2(void) {
-	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, OFF);
-	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ON);
+	trafficLightBlinkYel(TRAFFIC_LIGHT_1);
 }
 
 void task3(void) {
-	HAL_GPIO_WritePin(D6_GPIO_Port, D6_Pin, ON);
-	HAL_GPIO_WritePin(D7_GPIO_Port, D7_Pin, ON);
+	trafficLightBlinkRed(TRAFFIC_LIGHT_2);
 }
 /* USER CODE END 0 */
 
@@ -106,9 +104,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);
 
-  SCH_Add_Task(&task1, 0, 5000);
-  SCH_Add_Task(&task2, 5000, 5000);
-  SCH_Add_Task(&task3, 10000, 2000);
+  SCH_Add_Task(&task1, 0, 500);
+  SCH_Add_Task(&task2, 0, 1500);
+  SCH_Add_Task(&task3, 0, 2000);
   /* USER CODE END 2 */
 
   /* Infinite loop */

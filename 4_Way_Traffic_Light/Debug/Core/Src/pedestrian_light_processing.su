@@ -1,0 +1,5 @@
+../Core/Src/pedestrian_light_processing.c:21:6:pedestrianLightBlinkGrn	8	static
+../Core/Src/pedestrian_light_processing.c:26:6:pedestrianLightBlinkRed	8	static
+../Core/Src/pedestrian_light_processing.c:31:6:pedestrianLightGrn	8	static
+../Core/Src/pedestrian_light_processing.c:36:6:pedestrianLightRed	8	static
+../Core/Src/pedestrian_light_processing.c:41:6:pedestrianLightOff	8	static

@@ -1,0 +1,30 @@
+/*
+ * pedestrian_light_processing.h
+ *
+ *  Created on: Dec 13, 2022
+ *      Author: ADMIN
+ */
+
+#ifndef INC_PEDESTRIAN_LIGHT_PROCESSING_H_
+#define INC_PEDESTRIAN_LIGHT_PROCESSING_H_
+
+#include "main.h"
+#include "global.h"
+
+#define ON			GPIO_PIN_SET
+#define OFF			GPIO_PIN_RESET
+
+#define NUM_OF_PORTS 				2
+
+#define RED_LIGHT	0
+#define GRN_LIGHT 	1
+
+void pedestrianLightBlinkGrn(void);
+void pedestrianLightBlinkRed(void);
+
+void pedestrianLightGrn(void);
+void pedestrianLightRed(void);
+
+void pedestrianLightOff(void);
+
+#endif /* INC_PEDESTRIAN_LIGHT_PROCESSING_H_ */
