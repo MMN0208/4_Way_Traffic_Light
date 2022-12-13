@@ -54,7 +54,11 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void test_IO() {
+	HAL_GPIO_WritePin(D5_GPIO_Port, D5_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(D4_GPIO_Port, D4_Pin, GPIO_PIN_SET);
+	HAL_GPIO_TogglePin(D12_GPIO_Port, D12_Pin);
+}
 /* USER CODE END 0 */
 
 /**
@@ -94,6 +98,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  test_IO();
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
