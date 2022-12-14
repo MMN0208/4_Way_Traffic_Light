@@ -1,9 +1,0 @@
-/*
- * uart_communication.c
- *
- *  Created on: Dec 14, 2022
- *      Author: ADMIN
- */
-
-
-#include "uart_communication.h"
