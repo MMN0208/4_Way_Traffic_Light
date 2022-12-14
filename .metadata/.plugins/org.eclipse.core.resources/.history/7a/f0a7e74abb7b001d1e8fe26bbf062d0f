@@ -1,0 +1,25 @@
+/*
+ * global.h
+ *
+ *  Created on: Dec 13, 2022
+ *      Author: nhatmai
+ */
+
+#ifndef INC_GLOBAL_H_
+#define INC_GLOBAL_H_
+
+#define SYSTEM_DELAY 	10
+#define SECOND			1000 // 1s = 1000ms
+
+typedef enum  {
+	INIT,
+	WAIT,
+	RST,
+	INC,
+	DEC,
+	LONG_INC,
+	LONG_DEC,
+	AUTO,
+} systemState;
+
+#endif /* INC_GLOBAL_H_ */

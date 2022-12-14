@@ -7,204 +7,206 @@
 
 #include "fsm_for_multi_mode.h"
 
-#define CHANGE_MODE 	0
-#define CHANGE_VALUE 	1
-#define SET_VALUE 		2
-
-#define TIMER_INIT 	10 // 10ms
-#define LED_BLINK	500 // 2Hz = 0.5s
-#define MAX_TIME	100
-
-#define MODE_YEL	2
-#define MODE_GRN	3
-
 int newGrnTime = 0;
 int newYelTime = 0;
 
-/*void fsm_multi_mode_run(void) {
-	switch(status) {
+void fsm_multi_mode_run(void) {
+	switch(sysStatus) {
 	case INIT:
-		//init timer 1 for 7seg led scanning
-		setTimer1(TIMER_INIT);
+		//init timer 1 for countdown updating
+		setTimer1(SECOND);
 
-		//init timer 2 for count-down updating
-		setTimer2(TIMER_INIT);
+		//init countdown
+		countdown = grnTime;
 
-		//set traffic timer to grn time
-		setTrafficTimer(getGrnTime());
+		auto_mode = 1;
 
-		//turn off all leds
-		allOff(SOUTH_NORTH);
-		allOff(EAST_WEST);
-
-		//set count-down for S/N, E/W lights
-		setCountdown(SOUTH_NORTH, getRedTime());
-		setCountdown(EAST_WEST, getGrnTime());
-		status = SN_RED__EW_GRN;
+		sysStatus = RED__GRN;
+		trafficLightRed(TRAFFIC_LIGHT_1);
+		trafficLightGrn(TRAFFIC_LIGHT_2);
+		displayCountdown(countdown);
 		break;
-	case SN_RED__EW_GRN:
-		redLight(SOUTH_NORTH);
-		grnLight(EAST_WEST);
-		updateCountdownBuffer();
-		scan7SEG();
 
-		if(timer2_flag == 1) {
-			setTimer2(SECOND);
-			updateCountdown();
+	case RED__GRN:
+		if(auto_mode == 1) {
+			if(timer1_flag == 1) {
+				setTimer1(SECOND);
+				countdown -= 1;
+				if(countdown == 0) {
+					countdown = yelTime;
+					sysStatus = RED__YEL;
+					trafficLightRed(TRAFFIC_LIGHT_1);
+					trafficLightYel(TRAFFIC_LIGHT_2);
+				}
+				displayCountdown(countdown);
+			}
+
+			if(isButtonPressed(BUTTON_1)) {
+				auto_mode = 0;
+			}
+		}
+		else {
+			if(isButtonPressed(BUTTON_1)) {
+				setTimer1(LED_BLINK);
+				newGrnTime = grnTime;
+				sysStatus = SET_GRN;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+				displayCountdown(newGrnTime);
+			}
+			else if(isButtonPressed(BUTTON_2)) {
+				sysStatus = RED__YEL;
+				trafficLightRed(TRAFFIC_LIGHT_1);
+				trafficLightYel(TRAFFIC_LIGHT_2);
+			}
 		}
 
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(getYelTime());
-			setCountdown(EAST_WEST, getYelTime());
-			status = SN_RED__EW_YEL;
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			setTrafficTimer(LED_BLINK);
-			setTimer1(TIMER_INIT);
-			reset7SEGIndex();
-			updateModeBuffer(MODE_YEL);
-			yelBlink();
-			newYelTime = getYelTime() / SECOND;
-			status = SET_YEL;
-		}
 		break;
-	case SN_RED__EW_YEL:
-		redLight(SOUTH_NORTH);
-		yelLight(EAST_WEST);
-		updateCountdownBuffer();
-		scan7SEG();
 
-		if(timer2_flag == 1) {
-			setTimer2(SECOND);
-			updateCountdown();
+	case RED__YEL:
+		if(auto_mode == 1) {
+			if(timer1_flag == 1) {
+				setTimer1(SECOND);
+				countdown--;
+				if(countdown == 0) {
+					countdown = grnTime;
+					sysStatus = GRN__RED;
+					trafficLightGrn(TRAFFIC_LIGHT_1);
+					trafficLightRed(TRAFFIC_LIGHT_2);
+				}
+				displayCountdown(countdown);
+			}
 		}
-
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(getGrnTime());
-			setCountdown(SOUTH_NORTH, getGrnTime());
-			setCountdown(EAST_WEST, getRedTime());
-			status = SN_GRN__EW_RED;
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			setTrafficTimer(LED_BLINK);
-			setTimer1(TIMER_INIT);
-			reset7SEGIndex();
-			updateModeBuffer(MODE_YEL);
-			yelBlink();
-			newYelTime = getYelTime() / SECOND;
-			status = SET_YEL;
-		}
-		break;
-	case SN_GRN__EW_RED:
-		grnLight(SOUTH_NORTH);
-		redLight(EAST_WEST);
-		updateCountdownBuffer();
-		scan7SEG();
-
-		if(timer2_flag == 1) {
-			setTimer2(SECOND);
-			updateCountdown();
-		}
-
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(getYelTime());
-			setCountdown(SOUTH_NORTH, getYelTime());
-			status = SN_YEL__EW_RED;
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			setTrafficTimer(LED_BLINK);
-			setTimer1(TIMER_INIT);
-			reset7SEGIndex();
-			updateModeBuffer(MODE_YEL);
-			yelBlink();
-			newYelTime = getYelTime() / SECOND;
-			status = SET_YEL;
+		else {
+			if(isButtonPressed(BUTTON_1)) {
+				setTimer1(LED_BLINK);
+				newGrnTime = grnTime;
+				sysStatus = SET_GRN;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+				displayCountdown(newGrnTime);
+			}
+			else if(isButtonPressed(BUTTON_2)) {
+				sysStatus = GRN__RED;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightRed(TRAFFIC_LIGHT_2);
+			}
 		}
 		break;
-	case SN_YEL__EW_RED:
-		yelLight(SOUTH_NORTH);
-		redLight(EAST_WEST);
-		updateCountdownBuffer();
-		scan7SEG();
 
-		if(timer2_flag == 1) {
-			setTimer2(SECOND);
-			updateCountdown();
+	case GRN__RED:
+		if(auto_mode == 1) {
+			if(timer1_flag == 1) {
+				setTimer1(SECOND);
+				countdown--;
+				if(countdown == 0) {
+					countdown = yelTime;
+					sysStatus = YEL__RED;
+					trafficLightYel(TRAFFIC_LIGHT_1);
+					trafficLightRed(TRAFFIC_LIGHT_2);
+				}
+				displayCountdown(countdown);
+			}
 		}
-
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(getGrnTime());
-			setCountdown(SOUTH_NORTH, getRedTime());
-			setCountdown(EAST_WEST, getGrnTime());
-			status = SN_RED__EW_GRN;
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			setTrafficTimer(LED_BLINK);
-			setTimer1(TIMER_INIT);
-			reset7SEGIndex();
-			updateModeBuffer(MODE_YEL);
-			yelBlink();
-			newYelTime = getYelTime() / SECOND;
-			status = SET_YEL;
-		}
-		break;
-	case SET_YEL:
-		updateTimeBuffer(newYelTime);
-		scan7SEG();
-
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(LED_BLINK);
-			yelBlink();
-		}
-
-		if(is_button_pressed(CHANGE_VALUE)) {
-			newYelTime = (newYelTime + 1) % MAX_TIME;
-			updateTimeBuffer(newYelTime);
-		}
-
-		if(is_button_pressed(SET_VALUE)) {
-			updateYelTime(newYelTime);
-			updateRedTime();
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			setTrafficTimer(LED_BLINK);
-			setTimer1(TIMER_INIT);
-			reset7SEGIndex();
-			updateModeBuffer(MODE_GRN);
-			grnBlink();
-			newGrnTime = getGrnTime() / SECOND;
-			status = SET_GRN;
+		else {
+			if(isButtonPressed(BUTTON_1)) {
+				setTimer1(LED_BLINK);
+				newGrnTime = grnTime;
+				sysStatus = SET_GRN;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+				displayCountdown(newGrnTime);
+			}
+			else if(isButtonPressed(BUTTON_2)) {
+				sysStatus = YEL__RED;
+				trafficLightYel(TRAFFIC_LIGHT_1);
+				trafficLightRed(TRAFFIC_LIGHT_2);
+			}
 		}
 		break;
+
+	case YEL__RED:
+		if(auto_mode == 1) {
+			if(timer1_flag == 1) {
+				setTimer1(SECOND);
+				countdown--;
+				if(countdown == 0) {
+					countdown = grnTime;
+					sysStatus = RED__GRN;
+					trafficLightRed(TRAFFIC_LIGHT_1);
+					trafficLightGrn(TRAFFIC_LIGHT_2);
+				}
+				displayCountdown(countdown);
+			}
+		}
+		else {
+			if(isButtonPressed(BUTTON_1)) {
+				setTimer1(LED_BLINK);
+				newGrnTime = grnTime;
+				sysStatus = SET_GRN;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+				displayCountdown(newGrnTime);
+			}
+			else if(isButtonPressed(BUTTON_2)) {
+				sysStatus = RED__GRN;
+				trafficLightRed(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+			}
+		}
+		break;
+
 	case SET_GRN:
-		updateTimeBuffer(newGrnTime);
-		scan7SEG();
-
-		if(traffic_timer_flag == 1) {
-			setTrafficTimer(LED_BLINK);
-			grnBlink();
+		if(isButtonPressed(BUTTON_1)) {
+			setTimer1(LED_BLINK);
+			newYelTime = yelTime;
+			sysStatus = SET_YEL;
+			trafficLightYel(TRAFFIC_LIGHT_1);
+			trafficLightYel(TRAFFIC_LIGHT_2);
+			displayCountdown(newYelTime);
+		}
+		else if(isButtonPressed(BUTTON_2)) {
+			newGrnTime++;
+			displayCountdown(newGrnTime);
+		}
+		else if(isButtonPressed(BUTTON_3)) {
+			grnTime = newGrnTime;
+			redTime = grnTime + yelTime;
 		}
 
-		if(is_button_pressed(CHANGE_VALUE)) {
-			newGrnTime = (newGrnTime + 1) % MAX_TIME;
-			updateTimeBuffer(newGrnTime);
-		}
-
-		if(is_button_pressed(SET_VALUE)) {
-			updateGrnTime(newGrnTime);
-			updateRedTime();
-		}
-
-		if(is_button_pressed(CHANGE_MODE)) {
-			reset7SEGIndex();
-			status = INIT;
+		if(timer1_flag == 1) {
+			setTimer1(LED_BLINK);
+			trafficLightBlinkGrn(TRAFFIC_LIGHT_1);
+			trafficLightBlinkGrn(TRAFFIC_LIGHT_2);
 		}
 		break;
+
+	case SET_YEL:
+		if(isButtonPressed(BUTTON_1)) {
+			setTimer1(SECOND);
+			countdown = grnTime;
+			auto_mode = 1;
+			sysStatus = RED__GRN;
+			trafficLightRed(TRAFFIC_LIGHT_1);
+			trafficLightGrn(TRAFFIC_LIGHT_2);
+			displayCountdown(countdown);
+		}
+		else if(isButtonPressed(BUTTON_2)) {
+			newYelTime++;
+			displayCountdown(newYelTime);
+		}
+		else if(isButtonPressed(BUTTON_3)) {
+			yelTime = newYelTime;
+			redTime = grnTime + yelTime;
+		}
+
+		if(timer1_flag == 1) {
+			setTimer1(LED_BLINK);
+			trafficLightBlinkYel(TRAFFIC_LIGHT_1);
+			trafficLightBlinkYel(TRAFFIC_LIGHT_2);
+		}
+		break;
+
 	default: break;
 	}
-}*/
+}

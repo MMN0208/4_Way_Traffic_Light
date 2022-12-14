@@ -1,0 +1,26 @@
+/*
+ * global.h
+ *
+ *  Created on: Dec 13, 2022
+ *      Author: nhatmai
+ */
+
+#ifndef INC_GLOBAL_H_
+#define INC_GLOBAL_H_
+
+#define SYSTEM_DELAY 	10
+#define SECOND			1000 // 1s = 1000ms
+
+typedef enum  {
+	INIT,
+	SN_RED__EW_GRN,
+	SN_RED__EW_YEL,
+	SN_GRN__EW_RED,
+	SN_YEL__EW_RED,
+	SET_YEL,
+	SET_GRN
+} systemState;
+
+extern systemState sysStatus;
+
+#endif /* INC_GLOBAL_H_ */

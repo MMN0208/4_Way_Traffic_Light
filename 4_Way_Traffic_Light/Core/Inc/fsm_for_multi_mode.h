@@ -8,7 +8,6 @@
 #ifndef INC_FSM_FOR_MULTI_MODE_H_
 #define INC_FSM_FOR_MULTI_MODE_H_
 
-#include "input_reading.h"
 #include "global.h"
 
 void fsm_multi_mode_run(void);

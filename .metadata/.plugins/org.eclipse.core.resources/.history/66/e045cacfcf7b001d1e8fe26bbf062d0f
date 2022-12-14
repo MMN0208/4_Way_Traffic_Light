@@ -1,0 +1,103 @@
+/*
+ * fsm_for_mode_switching.c
+ *
+ *  Created on: Oct 30, 2022
+ *      Author: ADMIN
+ */
+
+#include "fsm_for_multi_mode.h"
+
+#define TIMER_INIT 	10 // 10ms
+#define SECOND		100 // 1s = 1000ms
+#define LED_BLINK	500 // 2Hz = 0.5s
+#define MAX_TIME	100
+
+int redTime = 5;
+int yelTime = 2;
+int grnTime = 3;
+
+int newGrnTime = 0;
+int newYelTime = 0;
+
+int countdown = 0;
+
+void fsm_multi_mode_run(void) {
+	switch(sysStatus) {
+	case INIT:
+		//init timer 1 for countdown updating
+		setTimer1(SECOND);
+
+		//init countdown
+		countdown = redTime;
+
+		sysStatus = RED__GRN;
+		trafficLightRed(TRAFFIC_LIGHT_1);
+		trafficLightGrn(TRAFFIC_LIGHT_2);
+		displayCountdown(countdown);
+		break;
+	case RED__GRN:
+		displayCountdown(countdown);
+
+		if(timer1_flag == 1) {
+			setTimer1(SECOND);
+			countdown -= 1;
+			if(countdown == redTime - grnTime) {
+				sysStatus = RED__YEL;
+				trafficLightRed(TRAFFIC_LIGHT_1);
+				trafficLightYel(TRAFFIC_LIGHT_2);
+				displayCountdown(countdown);
+			}
+		}
+		break;
+
+	case RED__YEL:
+		displayCountdown(countdown);
+
+		if(timer1_flag == 1) {
+			setTimer1(SECOND);
+			countdown--;
+			if(countdown == 0) {
+				countdown = grnTime;
+				sysStatus = GRN__RED;
+				trafficLightGrn(TRAFFIC_LIGHT_1);
+				trafficLightRed(TRAFFIC_LIGHT_2);
+				displayCountdown(countdown);
+			}
+		}
+		break;
+
+	case GRN__RED:
+		displayCountdown(countdown);
+
+		if(timer1_flag == 1) {
+			setTimer1(SECOND);
+			countdown--;
+			if(countdown == 0) {
+				countdown = yelTime;
+				sysStatus = YEL__RED;
+				trafficLightYel(TRAFFIC_LIGHT_1);
+				trafficLightRed(TRAFFIC_LIGHT_2);
+				displayCountdown(countdown);
+			}
+		}
+		break;
+
+	case YEL__RED:
+		displayCountdown(countdown);
+
+		if(timer1_flag == 1) {
+			setTimer1(SECOND);
+			countdown--;
+			if(countdown == 0) {
+				countdown = redTime;
+				sysStatus = RED__GRN;
+				trafficLightRed(TRAFFIC_LIGHT_1);
+				trafficLightGrn(TRAFFIC_LIGHT_2);
+				displayCountdown(countdown);
+			}
+		}
+		break;
+
+	default: break;
+	}
+}

@@ -26,7 +26,10 @@ Core/Src/traffic_light_processing.o: \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/global.h
+ ../Core/Inc/global.h ../Core/Inc/software_timer.h \
+ ../Core/Inc/input_reading.h ../Core/Inc/uart_communication.h \
+ ../Core/Inc/usart.h ../Core/Inc/traffic_light_processing.h \
+ ../Core/Inc/pedestrian_light_processing.h
 ../Core/Inc/traffic_light_processing.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -55,3 +58,9 @@ Core/Src/traffic_light_processing.o: \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Core/Inc/global.h:
+../Core/Inc/software_timer.h:
+../Core/Inc/input_reading.h:
+../Core/Inc/uart_communication.h:
+../Core/Inc/usart.h:
+../Core/Inc/traffic_light_processing.h:
+../Core/Inc/pedestrian_light_processing.h:

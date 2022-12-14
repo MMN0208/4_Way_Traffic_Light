@@ -1,0 +1,21 @@
+/*
+ * global.c
+ *
+ *  Created on: Dec 14, 2022
+ *      Author: ADMIN
+ */
+
+
+#include "global.h"
+
+systemState sysStatus = INIT;
+
+pedestrianState pedestrianStatus = WAIT;
+
+int redTime = 10;
+int yelTime = 3;
+int grnTime = 7;
+
+int countdown = 0;
+
+int auto_mode = 1;

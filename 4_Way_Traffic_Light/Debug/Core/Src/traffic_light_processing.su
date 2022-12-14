@@ -4,4 +4,4 @@
 ../Core/Src/traffic_light_processing.c:36:6:trafficLightGrn	16	static
 ../Core/Src/traffic_light_processing.c:41:6:trafficLightYel	16	static
 ../Core/Src/traffic_light_processing.c:46:6:trafficLightRed	16	static
-../Core/Src/traffic_light_processing.c:51:6:trafficLighOff	16	static
+../Core/Src/traffic_light_processing.c:51:6:trafficLightOff	16	static

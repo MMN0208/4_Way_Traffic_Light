@@ -48,7 +48,7 @@ void trafficLightRed(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], OFF);
 }
 
-void trafficLighOff(int index) {
+void trafficLightOff(int index) {
 	HAL_GPIO_WritePin(trafficLightPort[index][RED_LIGHT], trafficLightPin[index][RED_LIGHT], OFF);
 	HAL_GPIO_WritePin(trafficLightPort[index][GRN_LIGHT], trafficLightPin[index][GRN_LIGHT], OFF);
 }

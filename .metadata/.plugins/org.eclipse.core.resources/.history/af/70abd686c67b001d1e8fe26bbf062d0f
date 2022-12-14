@@ -1,0 +1,40 @@
+/*
+ * global.h
+ *
+ *  Created on: Dec 13, 2022
+ *      Author: nhatmai
+ */
+
+#ifndef INC_GLOBAL_H_
+#define INC_GLOBAL_H_
+
+#include "software_timer.h"
+#include "input_reading.h"
+#include "uart_communication.h"
+#include "traffic_light_processing.h"
+#include "pedestrian_light_processing.h"
+
+#define SYSTEM_DELAY 	10
+#define SECOND			1000 // 1s = 1000ms
+
+typedef enum  {
+	INIT,
+	AUTO_RED__GRN,
+	AUTO_RED__YEL,
+	AUTO_GRN__RED,
+	AUTO_YEL__RED,
+
+	SET_YEL,
+	SET_GRN
+} systemState;
+
+extern systemState sysStatus;
+
+typedef enum {
+	WAIT,
+	RUN
+} pedestrianState;
+
+extern pedestrianState pesdestrianStatus;
+
+#endif /* INC_GLOBAL_H_ */

@@ -1,0 +1,40 @@
+/*
+ * fsm_for_pedestrian.c
+ *
+ *  Created on: Dec 15, 2022
+ *      Author: ADMIN
+ */
+
+
+#include "fsm_for_pedestrian.h"
+
+int timeOut;
+
+void fsm_for_pedestrian(void) {
+	switch(pedestrianStatus) {
+	case WAIT:
+		if(isButtonPressed(PEDESTRIAN_BUTTON)) {
+			timeOut = (redTime + yelTime + grnTime) * SYSTEM_DELAY;
+			setTimer2(timeOut);
+			if(systemStatus == RED__GRN || systemStatus == RED__YEL) {
+				pedestrianStatus = GRN;
+			}
+			else if(systemStatus == GRN__RED || systemStatus == YEL__RED) {
+				pedestrianStatus = RED;
+			}
+		}
+		break;
+
+	case GRN:
+
+		break;
+
+	case RED:
+
+		if(timer2_flag == 1) {
+			pedestrianStatus = WAIT;
+			pedestrianLightOff();
+		}
+		break;
+	}
+}

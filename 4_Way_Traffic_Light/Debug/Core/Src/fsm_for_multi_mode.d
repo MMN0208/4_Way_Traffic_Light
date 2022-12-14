@@ -1,5 +1,6 @@
 Core/Src/fsm_for_multi_mode.o: ../Core/Src/fsm_for_multi_mode.c \
- ../Core/Inc/fsm_for_multi_mode.h ../Core/Inc/input_reading.h \
+ ../Core/Inc/fsm_for_multi_mode.h ../Core/Inc/global.h \
+ ../Core/Inc/software_timer.h ../Core/Inc/input_reading.h \
  ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
@@ -25,8 +26,12 @@ Core/Src/fsm_for_multi_mode.o: ../Core/Src/fsm_for_multi_mode.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/global.h
+ ../Core/Inc/uart_communication.h ../Core/Inc/usart.h \
+ ../Core/Inc/traffic_light_processing.h \
+ ../Core/Inc/pedestrian_light_processing.h
 ../Core/Inc/fsm_for_multi_mode.h:
+../Core/Inc/global.h:
+../Core/Inc/software_timer.h:
 ../Core/Inc/input_reading.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -54,4 +59,7 @@ Core/Src/fsm_for_multi_mode.o: ../Core/Src/fsm_for_multi_mode.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
-../Core/Inc/global.h:
+../Core/Inc/uart_communication.h:
+../Core/Inc/usart.h:
+../Core/Inc/traffic_light_processing.h:
+../Core/Inc/pedestrian_light_processing.h:

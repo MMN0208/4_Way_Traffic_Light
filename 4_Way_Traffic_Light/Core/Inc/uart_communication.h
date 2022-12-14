@@ -1,0 +1,17 @@
+/*
+ * uart_communication.h
+ *
+ *  Created on: Dec 14, 2022
+ *      Author: ADMIN
+ */
+
+#ifndef INC_UART_COMMUNICATION_H_
+#define INC_UART_COMMUNICATION_H_
+
+#include "global.h"
+#include "usart.h"
+#include <stdio.h>
+
+void displayCountdown(int value);
+
+#endif /* INC_UART_COMMUNICATION_H_ */
