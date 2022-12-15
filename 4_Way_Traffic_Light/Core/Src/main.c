@@ -47,7 +47,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t value = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,11 +91,14 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_TIM3_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim3);
+  HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
   SCH_Add_Task(&buttonRead, 0, 10);
   SCH_Add_Task(&timerRun, 10, 10);
+  SCH_Add_Task(&testBuzzer, 20, 100);
   SCH_Add_Task(&fsm_multi_mode_run, 20, 10);
   SCH_Add_Task(&fsm_for_pedestrian, 30, 10);
   /* USER CODE END 2 */
@@ -151,7 +154,6 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-int count = 100;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
 	SCH_Update();
