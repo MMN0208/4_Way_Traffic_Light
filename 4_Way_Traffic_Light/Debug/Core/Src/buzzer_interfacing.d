@@ -1,5 +1,5 @@
-Core/Src/uart_communication.o: ../Core/Src/uart_communication.c \
- ../Core/Inc/uart_communication.h ../Core/Inc/global.h \
+Core/Src/buzzer_interfacing.o: ../Core/Src/buzzer_interfacing.c \
+ ../Core/Inc/buzzer_interfacing.h ../Core/Inc/global.h \
  ../Core/Inc/software_timer.h ../Core/Inc/input_reading.h \
  ../Core/Inc/main.h ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
@@ -26,10 +26,11 @@ Core/Src/uart_communication.o: ../Core/Src/uart_communication.c \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- ../Core/Inc/uart_communication.h ../Core/Inc/traffic_light_processing.h \
+ ../Core/Inc/uart_communication.h ../Core/Inc/usart.h \
+ ../Core/Inc/traffic_light_processing.h \
  ../Core/Inc/pedestrian_light_processing.h \
- ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h ../Core/Inc/usart.h
-../Core/Inc/uart_communication.h:
+ ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h
+../Core/Inc/buzzer_interfacing.h:
 ../Core/Inc/global.h:
 ../Core/Inc/software_timer.h:
 ../Core/Inc/input_reading.h:
@@ -60,8 +61,8 @@ Core/Src/uart_communication.o: ../Core/Src/uart_communication.c \
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 ../Core/Inc/uart_communication.h:
+../Core/Inc/usart.h:
 ../Core/Inc/traffic_light_processing.h:
 ../Core/Inc/pedestrian_light_processing.h:
 ../Core/Inc/buzzer_interfacing.h:
 ../Core/Inc/tim.h:
-../Core/Inc/usart.h:

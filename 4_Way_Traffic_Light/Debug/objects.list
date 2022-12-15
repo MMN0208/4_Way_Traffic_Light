@@ -1,3 +1,4 @@
+"./Core/Src/buzzer_interfacing.o"
 "./Core/Src/fsm_for_multi_mode.o"
 "./Core/Src/fsm_for_pedestrian.o"
 "./Core/Src/global.o"

@@ -29,7 +29,8 @@ Core/Src/pedestrian_light_processing.o: \
  ../Core/Inc/global.h ../Core/Inc/software_timer.h \
  ../Core/Inc/input_reading.h ../Core/Inc/uart_communication.h \
  ../Core/Inc/usart.h ../Core/Inc/traffic_light_processing.h \
- ../Core/Inc/pedestrian_light_processing.h
+ ../Core/Inc/pedestrian_light_processing.h \
+ ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h
 ../Core/Inc/pedestrian_light_processing.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -64,3 +65,5 @@ Core/Src/pedestrian_light_processing.o: \
 ../Core/Inc/usart.h:
 ../Core/Inc/traffic_light_processing.h:
 ../Core/Inc/pedestrian_light_processing.h:
+../Core/Inc/buzzer_interfacing.h:
+../Core/Inc/tim.h:

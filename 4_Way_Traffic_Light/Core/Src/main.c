@@ -98,7 +98,6 @@ int main(void)
 
   SCH_Add_Task(&buttonRead, 0, 10);
   SCH_Add_Task(&timerRun, 10, 10);
-  SCH_Add_Task(&testBuzzer, 20, 100);
   SCH_Add_Task(&fsm_multi_mode_run, 20, 10);
   SCH_Add_Task(&fsm_for_pedestrian, 30, 10);
   /* USER CODE END 2 */

@@ -28,7 +28,8 @@ Core/Src/sched.o: ../Core/Src/sched.c ../Core/Inc/sched.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/uart_communication.h ../Core/Inc/usart.h \
  ../Core/Inc/traffic_light_processing.h \
- ../Core/Inc/pedestrian_light_processing.h ../Core/Inc/task.h
+ ../Core/Inc/pedestrian_light_processing.h \
+ ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h ../Core/Inc/task.h
 ../Core/Inc/sched.h:
 ../Core/Inc/global.h:
 ../Core/Inc/software_timer.h:
@@ -63,4 +64,6 @@ Core/Src/sched.o: ../Core/Src/sched.c ../Core/Inc/sched.h \
 ../Core/Inc/usart.h:
 ../Core/Inc/traffic_light_processing.h:
 ../Core/Inc/pedestrian_light_processing.h:
+../Core/Inc/buzzer_interfacing.h:
+../Core/Inc/tim.h:
 ../Core/Inc/task.h:
