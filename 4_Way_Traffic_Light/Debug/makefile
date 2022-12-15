@@ -60,8 +60,8 @@ all: main-build
 main-build: 4_Way_Traffic_Light.elf secondary-outputs
 
 # Tool invocations
-4_Way_Traffic_Light.elf 4_Way_Traffic_Light.map: $(OBJS) $(USER_OBJS) /Users/nhatmai/Documents/Semester\ 221/Microcontroller\ -\ Microprocessor/4_Way_Traffic_Light/4_Way_Traffic_Light/STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "4_Way_Traffic_Light.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/nhatmai/Documents/Semester 221/Microcontroller - Microprocessor/4_Way_Traffic_Light/4_Way_Traffic_Light/STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="4_Way_Traffic_Light.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+4_Way_Traffic_Light.elf 4_Way_Traffic_Light.map: $(OBJS) $(USER_OBJS) /Users/kietr/Documents/GitHub/4_Way_Traffic_Light/Untitled/4_Way_Traffic_Light/STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "4_Way_Traffic_Light.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/kietr/Documents/GitHub/4_Way_Traffic_Light/Untitled/4_Way_Traffic_Light/STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="4_Way_Traffic_Light.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
