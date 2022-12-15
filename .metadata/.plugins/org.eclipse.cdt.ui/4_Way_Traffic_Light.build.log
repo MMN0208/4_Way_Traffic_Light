@@ -1,17 +1,17 @@
-02:25:51 **** Incremental Build of configuration Debug for project 4_Way_Traffic_Light ****
+13:18:42 **** Incremental Build of configuration Debug for project 4_Way_Traffic_Light ****
 make -j12 all 
-arm-none-eabi-gcc "../Core/Src/fsm_for_multi_mode.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm_for_multi_mode.d" -MT"Core/Src/fsm_for_multi_mode.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/fsm_for_multi_mode.o"
+arm-none-eabi-gcc "../Core/Src/global.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/global.d" -MT"Core/Src/global.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/global.o"
 arm-none-eabi-gcc -o "4_Way_Traffic_Light.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\ADMIN\Documents\MCU\4_Way_Traffic_Light\4_Way_Traffic_Light\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="4_Way_Traffic_Light.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: 4_Way_Traffic_Light.elf
  
 arm-none-eabi-size   4_Way_Traffic_Light.elf 
 arm-none-eabi-objdump -h -S  4_Way_Traffic_Light.elf  > "4_Way_Traffic_Light.list"
    text	   data	    bss	    dec	    hex	filename
-  16652	    212	   2596	  19460	   4c04	4_Way_Traffic_Light.elf
+  16704	    212	   2596	  19512	   4c38	4_Way_Traffic_Light.elf
 Finished building: default.size.stdout
  
 Finished building: 4_Way_Traffic_Light.list
  
 
-02:25:51 Build Finished. 0 errors, 0 warnings. (took 473ms)
+13:18:42 Build Finished. 0 errors, 0 warnings. (took 468ms)
 

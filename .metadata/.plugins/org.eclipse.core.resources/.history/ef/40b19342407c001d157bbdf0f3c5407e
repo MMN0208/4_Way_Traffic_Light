@@ -111,10 +111,6 @@ void fsm_multi_mode_run(void) {
 				}
 				displayCountdown(countdown);
 			}
-
-			if(isButtonPressed(BUTTON_1)) {
-				auto_mode = 0;
-			}
 		}
 		else {
 			if(isButtonPressed(BUTTON_1)) {
@@ -145,10 +141,6 @@ void fsm_multi_mode_run(void) {
 					trafficLightGrn(TRAFFIC_LIGHT_2);
 				}
 				displayCountdown(countdown);
-			}
-
-			if(isButtonPressed(BUTTON_1)) {
-				auto_mode = 0;
 			}
 		}
 		else {

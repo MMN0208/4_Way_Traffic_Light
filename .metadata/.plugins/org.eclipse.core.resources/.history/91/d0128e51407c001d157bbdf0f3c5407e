@@ -12,9 +12,9 @@ systemState sysStatus = INIT;
 
 pedestrianState pedestrianStatus = WAIT;
 
-int redTime = 5;
-int yelTime = 2;
-int grnTime = 3;
+int redTime = 10;
+int yelTime = 3;
+int grnTime = 7;
 
 int countdown = 0;
 
