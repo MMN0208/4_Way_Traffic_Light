@@ -29,7 +29,7 @@ Core/Src/buzzer_interfacing.o: ../Core/Src/buzzer_interfacing.c \
  ../Core/Inc/uart_communication.h ../Core/Inc/usart.h \
  ../Core/Inc/traffic_light_processing.h \
  ../Core/Inc/pedestrian_light_processing.h \
- ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h
+ ../Core/Inc/buzzer_interfacing.h ../Core/Inc/tim.h ../Core/Inc/note.h
 ../Core/Inc/buzzer_interfacing.h:
 ../Core/Inc/global.h:
 ../Core/Inc/software_timer.h:
@@ -66,3 +66,4 @@ Core/Src/buzzer_interfacing.o: ../Core/Src/buzzer_interfacing.c \
 ../Core/Inc/pedestrian_light_processing.h:
 ../Core/Inc/buzzer_interfacing.h:
 ../Core/Inc/tim.h:
+../Core/Inc/note.h:
