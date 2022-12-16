@@ -136,7 +136,7 @@ void grnBuzzer(void) {
 //	}
 	if (grnBuzzerCounter < counter){
 		__HAL_TIM_SET_AUTORELOAD(&htim3, music1[grnBuzzerCounter]);
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, music1Duration[grnBuzzerCounter]);
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 15);
 		grnBuzzerCounter++;
 	} else {
 		grnBuzzerCounter = 0;
@@ -147,7 +147,7 @@ void redBuzzer(void) {
 	int counter = sizeof(music2)/sizeof(music2[0]);
 	if(redBuzzerCounter < counter) {
 		__HAL_TIM_SET_AUTORELOAD(&htim3, music2[redBuzzerCounter]);
-		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, music2Duration[redBuzzerCounter]);
+		__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, 15);
 		redBuzzerCounter ++;
 	}
 	else {
