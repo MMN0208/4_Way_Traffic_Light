@@ -96,10 +96,8 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-  SCH_Add_Task(&buttonRead, 0, 10);
-  SCH_Add_Task(&timerRun, 10, 10);
-  SCH_Add_Task(&fsm_multi_mode_run, 20, 10);
-  SCH_Add_Task(&fsm_for_pedestrian, 30, 10);
+  SCH_Add_Task(&fsm_multi_mode_run, 0, 10);
+  SCH_Add_Task(&fsm_for_pedestrian, 0, 10);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -155,6 +153,8 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
 {
+	timerRun();
+	buttonRead();
 	SCH_Update();
 }
 /* USER CODE END 4 */
