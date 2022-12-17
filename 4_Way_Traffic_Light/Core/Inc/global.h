@@ -18,7 +18,7 @@
 #define SYSTEM_DELAY 	10
 #define SECOND			1000 // 1s = 1000ms
 #define TIMER_INIT 		10 // 10ms
-#define LED_BLINK		100 // 2Hz = 0.5s
+#define LED_BLINK		100
 
 typedef enum  {
 	INIT,

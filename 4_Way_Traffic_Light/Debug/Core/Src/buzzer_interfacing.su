@@ -1,3 +1,3 @@
 ../Core/Src/buzzer_interfacing.c:126:6:grnBuzzer	16	static
 ../Core/Src/buzzer_interfacing.c:146:6:redBuzzer	16	static
-../Core/Src/buzzer_interfacing.c:158:6:stopBuzzer	4	static
+../Core/Src/buzzer_interfacing.c:159:6:stopBuzzer	4	static
