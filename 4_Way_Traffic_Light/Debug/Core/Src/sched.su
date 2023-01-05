@@ -1,5 +1,5 @@
-../Core/Src/sched.c:15:6:SCH_Init	16	static
-../Core/Src/sched.c:24:10:SCH_Add_Task	40	static
-../Core/Src/sched.c:62:6:SCH_Delete_Task	24	static
-../Core/Src/sched.c:76:6:SCH_Dispatch_Tasks	16	static
-../Core/Src/sched.c:88:6:SCH_Update	4	static
+../Core/Src/sched.c:16:6:SCH_Init	16	static
+../Core/Src/sched.c:25:10:SCH_Add_Task	48	static
+../Core/Src/sched.c:65:6:SCH_Delete_Task	32	static
+../Core/Src/sched.c:78:6:SCH_Dispatch_Tasks	40	static
+../Core/Src/sched.c:92:6:SCH_Update	4	static
