@@ -49,9 +49,13 @@ void buttonRead(void){
 				if(buttonBuffer[i] == BUTTON_IS_PRESSED) {
 					counterForButtonHold[i] = DURATION_FOR_BUTTON_HOLD;
 
-					if(counterForButtonDoublePressed[i] > 0) flagForButtonDoublePressed[i] = 1;
-
-					counterForButtonDoublePressed[i] = WAIT_FOR_DOUBLE_PRESS;
+					if(counterForButtonDoublePressed[i] > 0 && counterForButtonDoublePressed[i] < WAIT_FOR_DOUBLE_PRESS / SYSTEM_DELAY) {
+						flagForButtonDoublePressed[i] = 1;
+						counterForButtonDoublePressed[i] = 0;
+					}
+					else {
+						counterForButtonDoublePressed[i] = WAIT_FOR_DOUBLE_PRESS;
+					}
 
 					if(SYSTEM_DELAY > 0) {
 						counterForButtonHold[i] /= SYSTEM_DELAY;
@@ -65,15 +69,16 @@ void buttonRead(void){
 			}
 			else {
 				if(buttonBuffer[i] == BUTTON_IS_PRESSED) {
-					if(counterForButtonHold[i] > 0) {
-						counterForButtonHold[i]--;
-						if(counterForButtonHold[i] == 0) flagForButtonHold[i] = 1;
+					counterForButtonHold[i]--;
+					if(counterForButtonHold[i] == 0) {
+						flagForButtonHold[i] = 1;
+						counterForButtonDoublePressed[i] = 0;
 					}
 				}
 				else {
-					if(counterForButtonDoublePressed[i] > 0) {
-						counterForButtonDoublePressed[i]--;
-						if(counterForButtonDoublePressed[i] == 0) flagForButtonPressed[i] = 1;
+					counterForButtonDoublePressed[i]--;
+					if(counterForButtonDoublePressed[i] == 0) {
+						flagForButtonPressed[i] = 1;
 					}
 				}
 			}
