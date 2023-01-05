@@ -178,11 +178,12 @@ void fsm_multi_mode_run(void) {
 		}
 		else if(isButtonPressed(BUTTON_2)) {
 			newGrnTime++;
+			if(newGrnTime == MAX_VALUE) newGrnTime = 1;
 			displayCountdown(newGrnTime);
 		}
 		else if(isButtonDoublePressed(BUTTON_2)) {
-			if(newGrnTime == 0) newGrnTime = MAX_VALUE;
 			newGrnTime--;
+			if(newGrnTime == 0) newGrnTime = MAX_VALUE - 1;
 			displayCountdown(newGrnTime);
 		}
 		else if(isButtonPressed(BUTTON_3)) {
@@ -208,12 +209,13 @@ void fsm_multi_mode_run(void) {
 			displayCountdown(countdown);
 		}
 		else if(isButtonPressed(BUTTON_2)) {
-			newYelTime = (newYelTime + 1) % MAX_VALUE;
+			newYelTime++;
+			if(newYelTime == MAX_VALUE) newYelTime = 1;
 			displayCountdown(newYelTime);
 		}
 		else if(isButtonDoublePressed(BUTTON_2)) {
-			if(newYelTime == 0) newYelTime = MAX_VALUE;
 			newYelTime--;
+			if(newYelTime == 0) newYelTime = MAX_VALUE - 1;
 			displayCountdown(newYelTime);
 		}
 		else if(isButtonPressed(BUTTON_3)) {
