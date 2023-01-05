@@ -52,6 +52,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void UpdateTimer(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -96,7 +97,8 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
 
-  SCH_Add_Task(&timerRun, 0, 10);
+  // SCH_Add_Task(&timerRun, 0, 10);
+  SCH_Add_Task(&UpdateTimer, 0, 10);
   SCH_Add_Task(&buttonRead, 10, 10);
   SCH_Add_Task(&fsm_multi_mode_run, 20, 10);
   SCH_Add_Task(&fsm_for_pedestrian, 30, 10);
@@ -112,6 +114,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
+}
+
+void UpdateTimer(void) {
+  timerBreath(&timer1);
+  timerBreath(&timer2);
+  timerBreath(&timer3);
 }
 
 /**
