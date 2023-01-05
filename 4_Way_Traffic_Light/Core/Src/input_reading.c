@@ -32,9 +32,11 @@ static GPIO_PinState debounceButtonBuffer2[NO_OF_BUTTONS] = {BUTTON_IS_RELEASED,
 //we define a flag for a button pressed more than 1 second.
 static uint8_t flagForButtonPressed[NO_OF_BUTTONS];
 static uint8_t flagForButtonHold[NO_OF_BUTTONS];
+static uint8_t flagForButtonDoublePressed[NO_OF_BUTTONS];
 //we define counter for automatically increasing the value
 //after the button is pressed more than 1 second.
 static uint16_t counterForButtonHold[NO_OF_BUTTONS] = {0, 0, 0, 0};
+static uint16_t counterForButtonDoublePressed[NO_OF_BUTTONS] = {0, 0, 0, 0};
 
 void buttonRead(void){
 	for(int i = 0; i < NO_OF_BUTTONS; i++) {
@@ -46,12 +48,23 @@ void buttonRead(void){
 				buttonBuffer[i] = debounceButtonBuffer0[i];
 				if(buttonBuffer[i] == BUTTON_IS_PRESSED) {
 					counterForButtonHold[i] = DURATION_FOR_BUTTON_HOLD;
-					if(SYSTEM_DELAY > 0) counterForButtonHold[i] /= SYSTEM_DELAY;
 
-					flagForButtonPressed[i] = 1;
+					if(counterForButtonDoublePressed[i] > 0 && counterForButtonDoublePressed[i] < WAIT_FOR_DOUBLE_PRESS / SYSTEM_DELAY) {
+						flagForButtonDoublePressed[i] = 1;
+						counterForButtonDoublePressed[i] = 0;
+					}
+					else {
+						counterForButtonDoublePressed[i] = WAIT_FOR_DOUBLE_PRESS;
+					}
+
+					if(SYSTEM_DELAY > 0) {
+						counterForButtonHold[i] /= SYSTEM_DELAY;
+						counterForButtonDoublePressed[i] /= SYSTEM_DELAY;
+					}
 				}
 				else {
 					flagForButtonHold[i] = 0;
+					counterForButtonDoublePressed[i]--;
 				}
 			}
 			else {
@@ -59,6 +72,15 @@ void buttonRead(void){
 					counterForButtonHold[i]--;
 					if(counterForButtonHold[i] == 0) {
 						flagForButtonHold[i] = 1;
+						counterForButtonDoublePressed[i] = 0;
+					}
+				}
+				else {
+					if(counterForButtonDoublePressed[i] > 0) {
+						counterForButtonDoublePressed[i]--;
+						if(counterForButtonDoublePressed[i] == 0) {
+							flagForButtonPressed[i] = 1;
+						}
 					}
 				}
 			}
@@ -78,6 +100,15 @@ int isButtonPressed(int index) {
 int isButtonHold(int index) {
 	if(index < 0 || index > NO_OF_BUTTONS) return 0;
 	if(flagForButtonHold[index] == 1) {
+		return 1;
+	}
+	return 0;
+}
+
+int isButtonDoublePressed(int index) {
+	if(index < 0 || index > NO_OF_BUTTONS) return 0;
+	if(flagForButtonDoublePressed[index] == 1) {
+		flagForButtonDoublePressed[index] = 0;
 		return 1;
 	}
 	return 0;

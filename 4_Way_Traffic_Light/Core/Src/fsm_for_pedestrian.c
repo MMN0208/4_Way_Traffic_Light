@@ -35,28 +35,24 @@ void fsm_for_pedestrian(void) {
 			timeOut = (redTime + yelTime + grnTime) * SECOND;
 			setTimer(&timer2, timeOut);
 		}
-
-		if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
+		else if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
 			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
-
-		if(timer2.flag == 1) {
+		else if(timer2.flag == 1) {
 			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
-
-		if(sysStatus == GRN__RED) {
+		else if(sysStatus == GRN__RED) {
 			pedestrianStatus = RED;
 			pedestrianLightRed();
 			redBuzzer();
 		}
-
-		if(timer3.flag == 1) {
+		else if(timer3.flag == 1) {
 			if(sysStatus == RED__YEL) {
 				setTimer(&timer3, LED_BLINK);
 				pedestrianLightBlinkGrn();
@@ -75,28 +71,24 @@ void fsm_for_pedestrian(void) {
 			timeOut = (redTime + yelTime + grnTime) * SECOND;
 			setTimer(&timer2, timeOut);
 		}
-
-		if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
+		else if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
 			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
-
-		if(timer2.flag == 1) {
+		else if(timer2.flag == 1) {
 			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
-
-		if(sysStatus == RED__GRN) {
+		else if(sysStatus == RED__GRN) {
 			pedestrianStatus = GRN;
 			pedestrianLightGrn();
 			grnBuzzer();
 		}
-
-		if(timer3.flag == 1) {
+		else if(timer3.flag == 1) {
 			if(sysStatus == YEL__RED) {
 				setTimer(&timer3, LED_BLINK);
 				pedestrianLightBlinkRed();

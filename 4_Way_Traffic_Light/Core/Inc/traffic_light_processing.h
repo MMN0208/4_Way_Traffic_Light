@@ -23,6 +23,8 @@
 #define TRAFFIC_LIGHT_1 	0
 #define TRAFFIC_LIGHT_2		1
 
+#define MAX_VALUE			100
+
 void trafficLightBlinkGrn(int index);
 void trafficLightBlinkYel(int index);
 void trafficLightBlinkRed(int index);

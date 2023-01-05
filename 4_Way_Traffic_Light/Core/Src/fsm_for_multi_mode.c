@@ -15,11 +15,10 @@ void fsm_multi_mode_run(void)
     switch (sysStatus) {
     case INIT:
         // init timer 1 for countdown updating
-        setTimer(&timer1, SECOND);
-
+        setTimer(&timer1,SECOND);
 
         // init countdown
-        countdown = grnTime;
+        countdown = redTime;
 
         auto_mode = 1;
 
@@ -32,10 +31,9 @@ void fsm_multi_mode_run(void)
     case RED__GRN:
         if (auto_mode == 1) {
             if (timer1.flag == 1) {
-                setTimer(&timer1, SECOND);
-                countdown -= 1;
-                if (countdown == 0) {
-                    countdown = yelTime;
+                setTimer(&timer1,SECOND);
+                countdown--;
+                if (countdown == yelTime) {
                     sysStatus = RED__YEL;
                     trafficLightRed(TRAFFIC_LIGHT_1);
                     trafficLightYel(TRAFFIC_LIGHT_2);
@@ -48,7 +46,7 @@ void fsm_multi_mode_run(void)
             }
         } else {
             if (isButtonPressed(BUTTON_1)) {
-                setTimer(&timer1, LED_BLINK);
+                setTimer(&timer1,LED_BLINK);
                 newGrnTime = grnTime;
                 sysStatus = SET_GRN;
                 trafficLightGrn(TRAFFIC_LIGHT_1);
@@ -66,7 +64,7 @@ void fsm_multi_mode_run(void)
     case RED__YEL:
         if (auto_mode == 1) {
             if (timer1.flag == 1) {
-                setTimer(&timer1, SECOND);
+                setTimer(&timer1,SECOND);
                 countdown--;
                 if (countdown == 0) {
                     countdown = grnTime;
@@ -82,7 +80,7 @@ void fsm_multi_mode_run(void)
             }
         } else {
             if (isButtonPressed(BUTTON_1)) {
-                setTimer(&timer1, LED_BLINK);
+                setTimer(&timer1,LED_BLINK);
                 newGrnTime = grnTime;
                 sysStatus = SET_GRN;
                 trafficLightGrn(TRAFFIC_LIGHT_1);
@@ -99,7 +97,7 @@ void fsm_multi_mode_run(void)
     case GRN__RED:
         if (auto_mode == 1) {
             if (timer1.flag == 1) {
-                setTimer(&timer1, SECOND);
+                setTimer(&timer1,SECOND);
                 countdown--;
                 if (countdown == 0) {
                     countdown = yelTime;
@@ -115,7 +113,7 @@ void fsm_multi_mode_run(void)
             }
         } else {
             if (isButtonPressed(BUTTON_1)) {
-                setTimer(&timer1, LED_BLINK);
+                setTimer(&timer1,LED_BLINK);
                 newGrnTime = grnTime;
                 sysStatus = SET_GRN;
                 trafficLightGrn(TRAFFIC_LIGHT_1);
@@ -132,10 +130,10 @@ void fsm_multi_mode_run(void)
     case YEL__RED:
         if (auto_mode == 1) {
             if (timer1.flag == 1) {
-                setTimer(&timer1, SECOND);
+                setTimer(&timer1,SECOND);
                 countdown--;
                 if (countdown == 0) {
-                    countdown = grnTime;
+                    countdown = redTime;
                     sysStatus = RED__GRN;
                     trafficLightRed(TRAFFIC_LIGHT_1);
                     trafficLightGrn(TRAFFIC_LIGHT_2);
@@ -148,7 +146,7 @@ void fsm_multi_mode_run(void)
             }
         } else {
             if (isButtonPressed(BUTTON_1)) {
-                setTimer(&timer1, LED_BLINK);
+                setTimer(&timer1,LED_BLINK);
                 newGrnTime = grnTime;
                 sysStatus = SET_GRN;
                 trafficLightGrn(TRAFFIC_LIGHT_1);
@@ -164,7 +162,7 @@ void fsm_multi_mode_run(void)
 
     case SET_GRN:
         if (isButtonPressed(BUTTON_1)) {
-            setTimer(&timer1, LED_BLINK);
+            setTimer(&timer1,LED_BLINK);
             newYelTime = yelTime;
             sysStatus = SET_YEL;
             trafficLightYel(TRAFFIC_LIGHT_1);
@@ -172,6 +170,13 @@ void fsm_multi_mode_run(void)
             displayCountdown(newYelTime);
         } else if (isButtonPressed(BUTTON_2)) {
             newGrnTime++;
+            if (newGrnTime == MAX_VALUE)
+                newGrnTime = 1;
+            displayCountdown(newGrnTime);
+        } else if (isButtonDoublePressed(BUTTON_2)) {
+            newGrnTime--;
+            if (newGrnTime == 0)
+                newGrnTime = MAX_VALUE - 1;
             displayCountdown(newGrnTime);
         } else if (isButtonPressed(BUTTON_3)) {
             grnTime = newGrnTime;
@@ -179,7 +184,7 @@ void fsm_multi_mode_run(void)
         }
 
         if (timer1.flag == 1) {
-            setTimer(&timer1, LED_BLINK);
+            setTimer(&timer1,LED_BLINK);
             trafficLightBlinkGrn(TRAFFIC_LIGHT_1);
             trafficLightBlinkGrn(TRAFFIC_LIGHT_2);
         }
@@ -187,15 +192,16 @@ void fsm_multi_mode_run(void)
 
     case SET_YEL:
         if (isButtonPressed(BUTTON_1)) {
-            setTimer(&timer1, SECOND);
-            countdown = grnTime;
-            auto_mode = 1;
-            sysStatus = RED__GRN;
-            trafficLightRed(TRAFFIC_LIGHT_1);
-            trafficLightGrn(TRAFFIC_LIGHT_2);
-            displayCountdown(countdown);
+            sysStatus = INIT;
         } else if (isButtonPressed(BUTTON_2)) {
             newYelTime++;
+            if (newYelTime == MAX_VALUE)
+                newYelTime = 1;
+            displayCountdown(newYelTime);
+        } else if (isButtonDoublePressed(BUTTON_2)) {
+            newYelTime--;
+            if (newYelTime == 0)
+                newYelTime = MAX_VALUE - 1;
             displayCountdown(newYelTime);
         } else if (isButtonPressed(BUTTON_3)) {
             yelTime = newYelTime;
@@ -203,7 +209,7 @@ void fsm_multi_mode_run(void)
         }
 
         if (timer1.flag == 1) {
-            setTimer(&timer1, LED_BLINK);
+            setTimer(&timer1,LED_BLINK);
             trafficLightBlinkYel(TRAFFIC_LIGHT_1);
             trafficLightBlinkYel(TRAFFIC_LIGHT_2);
         }
