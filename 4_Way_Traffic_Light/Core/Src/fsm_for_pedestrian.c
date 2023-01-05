@@ -15,8 +15,8 @@ void fsm_for_pedestrian(void) {
 	case WAIT:
 		if(isButtonPressed(PEDESTRIAN_BUTTON)) {
 			timeOut = (redTime + yelTime + grnTime) * SECOND;
-			setTimer2(timeOut);
-			setTimer3(TIMER_INIT);
+			setTimer(&timer2, timeOut);
+			setTimer(&timer3, TIMER_INIT);
 			if(sysStatus == RED__GRN || sysStatus == RED__YEL) {
 				pedestrianStatus = GRN;
 				pedestrianLightGrn();
@@ -33,18 +33,18 @@ void fsm_for_pedestrian(void) {
 	case GRN:
 		if(isButtonPressed(PEDESTRIAN_BUTTON)) {
 			timeOut = (redTime + yelTime + grnTime) * SECOND;
-			setTimer2(timeOut);
+			setTimer(&timer2, timeOut);
 		}
 
 		if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
-			setTimer2(0);
+			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
 
-		if(timer2_flag == 1) {
-			setTimer2(0);
+		if(timer2.flag == 1) {
+			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
@@ -56,14 +56,14 @@ void fsm_for_pedestrian(void) {
 			redBuzzer();
 		}
 
-		if(timer3_flag == 1) {
+		if(timer3.flag == 1) {
 			if(sysStatus == RED__YEL) {
-				setTimer3(LED_BLINK);
+				setTimer(&timer3, LED_BLINK);
 				pedestrianLightBlinkGrn();
 				grnBuzzer();
 			}
 			else {
-				setTimer3(200);
+				setTimer(&timer3, 200);
 				grnBuzzer();
 			}
 		}
@@ -73,18 +73,18 @@ void fsm_for_pedestrian(void) {
 	case RED:
 		if(isButtonPressed(PEDESTRIAN_BUTTON)) {
 			timeOut = (redTime + yelTime + grnTime) * SECOND;
-			setTimer2(timeOut);
+			setTimer(&timer2, timeOut);
 		}
 
 		if(sysStatus == SET_GRN || sysStatus == SET_YEL) {
-			setTimer2(0);
+			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
 		}
 
-		if(timer2_flag == 1) {
-			setTimer2(0);
+		if(timer2.flag == 1) {
+			setTimer(&timer2, 0);
 			pedestrianStatus = WAIT;
 			pedestrianLightOff();
 			stopBuzzer();
@@ -96,14 +96,14 @@ void fsm_for_pedestrian(void) {
 			grnBuzzer();
 		}
 
-		if(timer3_flag == 1) {
+		if(timer3.flag == 1) {
 			if(sysStatus == YEL__RED) {
-				setTimer3(LED_BLINK);
+				setTimer(&timer3, LED_BLINK);
 				pedestrianLightBlinkRed();
 				redBuzzer();
 			}
 			else {
-				setTimer3(200);
+				setTimer(&timer3, 200);
 				redBuzzer();
 			}
 		}
