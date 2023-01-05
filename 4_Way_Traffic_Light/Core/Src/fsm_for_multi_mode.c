@@ -200,13 +200,7 @@ void fsm_multi_mode_run(void) {
 
 	case SET_YEL:
 		if(isButtonPressed(BUTTON_1)) {
-			setTimer1(SECOND);
-			countdown = grnTime;
-			auto_mode = 1;
-			sysStatus = RED__GRN;
-			trafficLightRed(TRAFFIC_LIGHT_1);
-			trafficLightGrn(TRAFFIC_LIGHT_2);
-			displayCountdown(countdown);
+			sysStatus = INIT;
 		}
 		else if(isButtonPressed(BUTTON_2)) {
 			newYelTime++;
