@@ -76,9 +76,11 @@ void buttonRead(void){
 					}
 				}
 				else {
-					counterForButtonDoublePressed[i]--;
-					if(counterForButtonDoublePressed[i] == 0) {
-						flagForButtonPressed[i] = 1;
+					if(counterForButtonDoublePressed[i] > 0) {
+						counterForButtonDoublePressed[i]--;
+						if(counterForButtonDoublePressed[i] == 0) {
+							flagForButtonPressed[i] = 1;
+						}
 					}
 				}
 			}
